@@ -155,3 +155,28 @@ zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
 
 flip' :: (a -> b -> c) -> b -> a -> c
 flip' f x y = f y x
+
+sum'' :: (Num a) => [a] -> a
+sum'' = foldl (+) 0 
+
+elem'' :: (Eq a) => a -> [a] -> Bool
+elem'' e = foldl (\x y -> x || (y == e)) False
+
+map' :: (a -> b) -> [a] -> [b]
+map' f = foldr (\x acc -> f x : acc) []
+
+smallSqrts :: Int
+smallSqrts = length (takeWhile (<1000) (scanl1 (+) (map sqrt [1..]))) + 1
+
+fn x = ceiling (negate (tan (cos (max 50 x))))  
+fn' = ceiling . negate . tan . cos . max 50 
+
+oddSquareSum :: Integer  
+oddSquareSum = sum . takeWhile (<10000) . filter odd . map (^2) $ [1..]  
+
+oddSquareSum' :: Integer  
+oddSquareSum' =   
+    let oddSquares = filter odd $ map (^2) [1..]  
+        belowLimit = takeWhile (<10000) oddSquares  
+    in  sum belowLimit 
+
