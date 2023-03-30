@@ -1,3 +1,5 @@
+import qualified Data.Map
+
 doubleMe x = x + x
 
 doubleUs x y = doubleMe x + doubleMe y
@@ -180,3 +182,7 @@ oddSquareSum' =
         belowLimit = takeWhile (<10000) oddSquares  
     in  sum belowLimit 
 
+
+fmap' f datamap = 
+    let assocList = Data.Map.toList datamap
+    in Data.Map.fromList (map (\(a, b) -> (a, f b)) assocList)
