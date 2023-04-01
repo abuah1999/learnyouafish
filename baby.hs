@@ -186,3 +186,10 @@ oddSquareSum' =
 fmap' f datamap = 
     let assocList = Data.Map.toList datamap
     in Data.Map.fromList (map (\(a, b) -> (a, f b)) assocList)
+
+withFile' :: FilePath -> IOMode -> (Handle -> IO a) -> IO a  
+withFile' path mode f = do  
+    handle <- openFile path mode   
+    result <- f handle  
+    hClose handle  
+    return result 
